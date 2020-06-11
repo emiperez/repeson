@@ -25,7 +25,7 @@ or Yasson:
 ### 2. Configuring the Transport
 1. Currently only HTTP Transport has been developed.
 1. Create a new **[HttpClient](https://openjdk.java.net/groups/net/httpclient/intro.html)** and Configure it with any HTTP related properties (Authentication, Proxy, Cookie Handler, SSL and so on)
-1. Build a new HttpTransport and inject the HttpClient to it
+1. Build a new `HttpTransport` and inject the `HttpClient` to it
 ```java
 Transport transport = HttpTransport.builder(httpClient).uri(uri).contentType(contentType).build();
 ```
