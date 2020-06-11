@@ -40,7 +40,7 @@ JsonRpcClient jsonRpcClient = JsonRpcClient.builder()
 ### 4.- Sending the Request and getting the Response
 Synchronous or blocking:
 ```java
-JsonRpcResponse<Customer> r = jsonRpcClient.sendRequestWithDefaults("getcustomermethod", paramsPojo);
+JsonRpcResponse<Customer> r = jsonRpcClient.sendRequestWithDefaults("getcustomer", paramsPojo);
 if (r.getError() == null) {
   Customer c = r.getResult();
   //Do whatever with c
@@ -49,6 +49,6 @@ if (r.getError() == null) {
 or Asynchronous (not blocking)
 ```java
 CompletableFuture<Customer> cc = jsonRpcClient
-  .sendRequestWithDefaultsAsync("getcustomermethod", paramsPojo)
+  .sendRequestWithDefaultsAsync("getcustomer", paramsPojo)
   .thenApply(JsonRpcResponse::getResult);
 ```
