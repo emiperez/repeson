@@ -29,11 +29,13 @@ or Yasson:
 Transport transport = HttpTransport.builder(httpClient).uri(uri).contentType(contentType).build();
 ```
 ### 3. Build the JsonRpcClient
+```java
 JsonRpcClient jsonRpcClient = JsonRpcClient.builder()
 					.transport(transport)
 					.version(JsonRpcVersion.v2_0)
 					.idGenerator(idGenerator)
 					.build();
+```
 ### 4.- Send the Request and get the Response
 Synchronous or blocking:
 ```java
