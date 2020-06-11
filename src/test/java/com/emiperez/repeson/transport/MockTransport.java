@@ -13,7 +13,7 @@
  * accompanied this code)
  */
 
-package com.emiperez.rpc.json.client.transport;
+package com.emiperez.repeson.transport;
 
 import static java.util.Map.entry;
 

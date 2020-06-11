@@ -1,4 +1,4 @@
-package com.emiperez.rpc.json.client;
+package com.emiperez.repeson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -23,8 +23,8 @@ import com.emiperez.repeson.client.JsonRpcRequest;
 import com.emiperez.repeson.client.JsonRpcResponse;
 import com.emiperez.repeson.client.JsonRpcResponseError;
 import com.emiperez.repeson.client.JsonRpcVersion;
+import com.emiperez.repeson.transport.MockTransport;
 import com.emiperez.repeson.transport.Transport;
-import com.emiperez.rpc.json.client.transport.MockTransport;
 
 import lombok.Getter;
 import lombok.extern.java.Log;

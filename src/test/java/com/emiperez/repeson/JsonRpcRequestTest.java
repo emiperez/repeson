@@ -1,4 +1,4 @@
-package com.emiperez.rpc.json.client;
+package com.emiperez.repeson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
