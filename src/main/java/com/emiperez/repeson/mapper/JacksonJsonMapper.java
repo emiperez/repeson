@@ -14,11 +14,6 @@ public class JacksonJsonMapper implements JsonMapper {
 	private static final ObjectMapper MAPPER = new ObjectMapper().enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);	
 	
 	@Override
-	public JsonDataObject getDataObject(InputStream input) throws IOException {
-		return new JacksonDataObject(input);
-	}
-
-	@Override
 	public String serialize(Object object) throws JsonRpcException {
 		try {
 			return MAPPER.writeValueAsString(object);

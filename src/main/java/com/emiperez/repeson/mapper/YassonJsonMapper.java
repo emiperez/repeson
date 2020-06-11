@@ -1,6 +1,5 @@
 package com.emiperez.repeson.mapper;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
@@ -50,11 +49,6 @@ public class YassonJsonMapper implements JsonMapper {
 		}
 
 	}));
-
-	@Override
-	public JsonDataObject getDataObject(InputStream input) throws IOException {
-		return new YassonDataObject(input);
-	}
 
 	@Override
 	public String serialize(Object object) {

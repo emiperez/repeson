@@ -7,7 +7,6 @@ import com.emiperez.repeson.client.JsonRpcException;
 
 public interface JsonMapper {
 	
-	JsonDataObject getDataObject(InputStream input) throws IOException;
 
 	String serialize(Object object) throws JsonRpcException;
 
