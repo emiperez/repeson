@@ -16,7 +16,7 @@
 package com.emiperez.repeson.client;
 
 /**
- * Wrapper for Exceptions occurred during a send of a request.
+ * Wrapper for Exceptions occurred during a sending of a request.
  * @author emiperez
  * @since 0.1
  */
