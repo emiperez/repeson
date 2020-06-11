@@ -1,7 +1,7 @@
 # repeson
 A JSON-RPC Client for Java.
 It can be used with either Jackson or Yasson Json libraries.
-It uses the HttpClient of JDK11, so request can be sent either blocking (synchronous) or not blocking (asynchronous)
+It uses the HttpClient of JDK11, so requests can be sent either blocking (synchronous) or not blocking (asynchronous)
 ## How to use it
 
 ### 1. Selecting the Json Mapping library
