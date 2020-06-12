@@ -1,12 +1,11 @@
-package com.emiperez.repeson.mapper;
+package com.emiperez.commons.json.apiselector;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import com.emiperez.repeson.client.JsonRpcException;
 
-public interface JsonMapper {
-	
+public interface JsonMapper {	
 
 	String serialize(Object object) throws JsonRpcException;
 

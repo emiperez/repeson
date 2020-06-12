@@ -1,4 +1,4 @@
-package com.emiperez.repeson.mapper;
+package com.emiperez.commons.json.apiselector;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;

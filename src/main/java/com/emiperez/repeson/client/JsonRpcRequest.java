@@ -17,7 +17,7 @@ package com.emiperez.repeson.client;
 
 import java.text.MessageFormat;
 
-import com.emiperez.repeson.mapper.Json;
+import com.emiperez.commons.json.apiselector.Json;
 
 import lombok.Getter;
 import lombok.NonNull;

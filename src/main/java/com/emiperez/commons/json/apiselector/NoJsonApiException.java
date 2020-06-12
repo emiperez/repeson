@@ -1,4 +1,4 @@
-package com.emiperez.repeson.mapper;
+package com.emiperez.commons.json.apiselector;
 
 public class NoJsonApiException extends Exception{
 	
