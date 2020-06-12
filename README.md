@@ -58,7 +58,8 @@ public class CustomerListResponse extends JsonRpcResponse<ArrayList<Customer>> {
 ```
 and passed as an argument to send methods:
 ```java
-CustomerListResponse r = jsonRpcClient.sendRequestWithDefaults("listcustomers", paramsPojo, CustomerListResponse.class);
+CustomerListResponse r = jsonRpcClient.sendRequestWithDefaults("listcustomers", paramsPojo, 
+								CustomerListResponse.class);
 if (r.getError() == null) {
   ArrayList<Customer> cs = r.getResult();
   //Do whatever with cs
