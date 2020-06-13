@@ -3,7 +3,7 @@ A JSON-RPC Client for Java.
 It can be used with either Jackson or Yasson Json libraries.
 It uses the HttpClient of JDK11, so requests can be sent either blocking (synchronous) or not blocking (asynchronous)
 ## How to use it
-### 1. Adding the dependency to your proyect
+### 1. Adding the dependency to your project
 ```xml
 <dependency>
   <groupId>com.emiperez.repeson</groupId>
