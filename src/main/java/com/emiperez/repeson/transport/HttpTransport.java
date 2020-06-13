@@ -43,6 +43,12 @@ public class HttpTransport implements Transport {
 			this.httpClient = httpClient;
 		}
 
+		/**
+		 * Set the URL of the JSON-RPC server. For example http://127.0.0.1:8595
+		 * 
+		 * @param uri
+		 * @return
+		 */
 		public Builder uri(URI uri) {
 			this.uri = uri;
 			return this;
@@ -77,7 +83,7 @@ public class HttpTransport implements Transport {
 	}
 
 	@Override
-	public CompletableFuture<InputStream> sendAsync(String rpcJsonRequest)  {
+	public CompletableFuture<InputStream> sendAsync(String rpcJsonRequest) {
 		return httpClient.sendAsync(buildHttpRequest(rpcJsonRequest), HttpResponse.BodyHandlers.ofInputStream())
 				.thenApply(r -> r.body());
 	}

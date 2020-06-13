@@ -19,6 +19,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * A POJO that represents the JSON-RPC's Response Error Attribute.
+ *
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

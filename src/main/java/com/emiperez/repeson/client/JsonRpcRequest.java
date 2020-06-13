@@ -96,7 +96,7 @@ public class JsonRpcRequest {
 
 	/***
 	 * @return The serialized Request object. If isNamedParams is set to false it
-	 *         returns an array.
+	 *         serializes params as an array.
 	 * @throws JsonRpcException
 	 */
 	public String getJson() throws JsonRpcException {
