@@ -46,8 +46,8 @@ public class HttpTransport implements Transport {
 		/**
 		 * Set the URL of the JSON-RPC server. For example http://127.0.0.1:8595
 		 * 
-		 * @param uri
-		 * @return
+		 * @param uri the URL of the JSON-RPC server
+		 * @return the Builder
 		 */
 		public Builder uri(URI uri) {
 			this.uri = uri;

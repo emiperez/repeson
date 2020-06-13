@@ -32,7 +32,7 @@ public interface Transport {
 	 * @param jsonRpcRequest the JSON-RPC Request
 	 * @return the JSON-RPC Response
 	 * @throws IOException          if an I/O error occurs when sending or receiving
-	 * @throws InterruptedException
+	 * @throws InterruptedException if the operation is interrupted
 	 */
 	InputStream send(String jsonRpcRequest) throws IOException, InterruptedException;
 

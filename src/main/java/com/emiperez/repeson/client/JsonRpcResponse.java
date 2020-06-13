@@ -45,9 +45,9 @@ public class JsonRpcResponse<T> {
 	 * @param <C>   The Type of the result property
 	 * @param input The InputStream of a JSON-RPC Response message
 	 * @return JsonRpcResponse whose result type does not use generics
-	 * @throws IOException
+	 * @throws IOException if an error occurs in deserialization
 	 */
-	public static <C> JsonRpcResponse<C> of(InputStream input) throws IOException {
+	public static <C> JsonRpcResponse<C> of(InputStream input) throws IOException  {
 		return Json.INSTANCE.api().deserialize(input, JsonRpcResponse.class);
 	}
 
@@ -62,7 +62,7 @@ public class JsonRpcResponse<T> {
 	 * @param type  Class that extends JsonRpcResponse to prevent the Type Erasure
 	 * @return The parsed JSON-RPC response as an Object of the Class that extends
 	 *         JsonRpcResponse
-	 * @throws IOException
+	 * @throws IOException if an error occurs in deserialization
 	 */
 	public static <R extends JsonRpcResponse<C>, C> R of(InputStream input, Class<R> type) throws IOException {
 		return Json.INSTANCE.api().deserialize(input, type);

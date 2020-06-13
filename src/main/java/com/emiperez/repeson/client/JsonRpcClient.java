@@ -148,7 +148,7 @@ public class JsonRpcClient {
 	 * @param <T>     the type of the result that the response should include
 	 * @param request the request
 	 * @param type    the Class that extends JsonRpcResponse
-	 * @return a <{@code CompletableFuture<R>}
+	 * @return a {@code CompletableFuture<R>}
 	 * @throws JsonRpcException if an error occurs in the serialization of the
 	 *                          request
 	 */
