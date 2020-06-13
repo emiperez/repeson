@@ -24,11 +24,9 @@ public class JacksonJsonMapper implements JsonMapper {
 	}	
 
 	@Override
-	public String serialize(Object params, boolean isNamedParams) throws JsonRpcException {
+	public String serializeAsArray(Object params) throws JsonRpcException {
 		ObjectMapper mapper = new ObjectMapper();
-		if(!isNamedParams) {
-			mapper.configOverride(params.getClass()).setFormat(JsonFormat.Value.forShape(JsonFormat.Shape.ARRAY));
-		}
+		mapper.configOverride(params.getClass()).setFormat(JsonFormat.Value.forShape(JsonFormat.Shape.ARRAY));
 		try {
 			return mapper.writeValueAsString(params);
 		} catch (JsonProcessingException e) {

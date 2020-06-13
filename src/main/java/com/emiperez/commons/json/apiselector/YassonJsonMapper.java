@@ -56,10 +56,7 @@ public class YassonJsonMapper implements JsonMapper {
 	}
 
 	@Override
-	public String serialize(Object object, boolean isNamedParams) {
-		if (isNamedParams) {
-			return jsonb.toJson(object);
-		}
+	public String serializeAsArray(Object object) {
 		return paramsJsonB.toJson(object);
 	}
 

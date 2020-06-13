@@ -2,7 +2,7 @@ package com.emiperez.commons.json.apiselector;
 
 import java.util.logging.Logger;
 /**
- * This Singleton loads the api selected in the dependences of the project, 
+ * This Singleton loads the api selected in the dependencies of the project, 
  * and hides it behind the JsonMapper interface.
  */
 public enum Json {

@@ -26,16 +26,18 @@ import lombok.extern.java.Log;
 /**
  * A JSON-RPC request.
  *
- * <p> An {@code JsonRpcRequest} instance is built through a builder.
- * Once all required parameters have been set in the builder, {@link
- * JsonRpcRequest.Builder#build() build} will return the {@code JsonRpcRquest}.
+ * <p>
+ * An {@code JsonRpcRequest} instance is built through a builder. Once all
+ * required parameters have been set in the builder,
+ * {@link JsonRpcRequest.Builder#build() build} will return the
+ * {@code JsonRpcRquest}.
  *
  * @since 0.1
  */
 
 @Log
 @Getter
-public class JsonRpcRequest{	
+public class JsonRpcRequest {
 
 	private static final String RPC_JSON_TEMPLATE = "'{'\"jsonrpc\": \"{0}\", \"id\": \"{1}\", \"method\": \"{2}\"{3}'}'";
 
@@ -46,7 +48,7 @@ public class JsonRpcRequest{
 	private String method;
 	private Object params;
 	private boolean isNamedParams;
-	
+
 	public static class Builder {
 		private JsonRpcVersion jsonrpc = JsonRpcVersion.v2_0;
 		@NonNull
@@ -55,32 +57,32 @@ public class JsonRpcRequest{
 		private String method;
 		private Object params;
 		private boolean isNamedParams = true;
-		
+
 		public Builder jsonrpc(JsonRpcVersion jsonrpc) {
 			this.jsonrpc = jsonrpc;
 			return this;
 		}
-		
+
 		public Builder id(String id) {
 			this.id = id;
-			return this;			
+			return this;
 		}
-		
+
 		public Builder method(String method) {
 			this.method = method;
 			return this;
 		}
-		
+
 		public Builder params(Object params) {
 			this.params = params;
 			return this;
 		}
-		
+
 		public Builder isNamedParams(boolean isNamedParams) {
 			this.isNamedParams = isNamedParams;
 			return this;
 		}
-		
+
 		public JsonRpcRequest build() {
 			JsonRpcRequest request = new JsonRpcRequest();
 			request.jsonrpc = jsonrpc;
@@ -91,23 +93,22 @@ public class JsonRpcRequest{
 			return request;
 		}
 	}
-	
-	/**
-	 * 
-	 * @param namedParams
-	 * @return
+
+	/***
+	 * @return The serialized Request object. If isNamedParams is set to false it
+	 *         returns an array.
 	 * @throws JsonRpcException
 	 */
 	public String getJson() throws JsonRpcException {
 		String paramsJson = "";
-		if(params != null) {
-			paramsJson = ", \"params\": " + Json.INSTANCE.api().serialize(params, isNamedParams);			
+		if (params != null) {
+			paramsJson = ", \"params\": " + (isNamedParams ? Json.INSTANCE.api().serialize(params)
+					: Json.INSTANCE.api().serializeAsArray(params));
 		}
 		String sRequest = MessageFormat.format(RPC_JSON_TEMPLATE, jsonrpc, id, method, paramsJson);
 		log.info("Request: " + sRequest);
 		return sRequest;
 	}
-	
 
 	public static Builder builder() {
 		return new Builder();
