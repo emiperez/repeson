@@ -186,14 +186,15 @@ public class JsonRpcClient {
 	 * Creates and sends a JSON-RPC Request, that needs no parameter and whose
 	 * method is passed as an argument, with this client. The id is obtained by the
 	 * client's {@link IdGenerator} 
-	 * @param <R>
-	 * @param <T>
-	 * @param method
-	 * @param type
-	 * @return
-	 * @throws IOException
-	 * @throws InterruptedException
-	 * @throws JsonRpcException
+	 * @param <R>    the Class that extends JsonRpcResponse
+	 * @param <T>    the type of the result that the response should include
+	 * @param method the method
+	 * @param type   the Class that extends JsonRpcResponse
+	 * @return the response
+	 * @throws IOException          if an I/O error occurs when sending or receiving
+	 * @throws InterruptedException if the operation is interrupted
+	 * @throws JsonRpcException     if an error occurs in the serialization of the
+	 *                              request
 	 */
 	public <R extends JsonRpcResponse<T>, T> R sendRequestWithDefaults(String method, Class<R> type)
 			throws IOException, InterruptedException, JsonRpcException {
@@ -207,7 +208,6 @@ public class JsonRpcClient {
 	 * extends {@link JsonRpcResponse}{@code <T>} to prevent Type Erasure. This
 	 * Class Type must be passed as an argument.
 	 * 
-	 * @param <R>    the Class that extends JsonRpcResponse 
 	 * @param <T>    the type of the result that the response should include
 	 * @param method the method
 	 * @param params a POJO with the method's parameters
@@ -269,6 +269,7 @@ public class JsonRpcClient {
 	 * 
 	 * @param <T>    the type of the result that the response should include
 	 * @param method the method
+	 * @param params a POJO with the method's parameters
 	 * @return a {@code CompletableFuture<JsonRpcResponse<T>>}
 	 * @throws JsonRpcException if an error occurs in the serialization of the
 	 *                          request
@@ -283,8 +284,10 @@ public class JsonRpcClient {
 	 * are passed as arguments, with this client. The id is obtained by the client's
 	 * {@link IdGenerator}
 	 * 
+	 * @param <R>    the Class that extends JsonRpcResponse
 	 * @param <T>    the type of the result that the response should include
 	 * @param method the method
+	 * @param type   the Class that extends JsonRpcResponse
 	 * @return a {@code CompletableFuture<JsonRpcResponse<T>>}
 	 * @throws JsonRpcException if an error occurs in the serialization of the
 	 *                          request
