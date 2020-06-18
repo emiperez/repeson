@@ -67,4 +67,20 @@ public class JsonRpcResponse<T> {
 	public static <R extends JsonRpcResponse<C>, C> R of(InputStream input, Class<R> type) throws IOException {
 		return Json.INSTANCE.api().deserialize(input, type);
 	}
+	
+	/**
+	 * 
+	 * @return true if this response has a result object. False otherwise.
+	 */
+	public boolean hasResult() {
+		return result != null;
+	}
+	
+	/**
+	 * 
+	 * @return true if this response has an Error object, false otherwise.
+	 */
+	public boolean hasError() {
+		return error != null;
+	}
 }

@@ -1,7 +1,9 @@
 package com.emiperez.repeson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -46,10 +48,11 @@ public class JsonRpcClientTest {
 		JsonRpcRequest request = JsonRpcRequest.builder().id("1").jsonrpc(JsonRpcVersion.v2_0).method("getinteger")
 				.build();
 		JsonRpcResponse<Integer> response = client.send(request);
+		assertTrue(response.hasResult());
 		assertEquals(response.getResult(), 19);
 		log.info("Id: " + response.getId());
 		assertEquals(response.getId(), "1");
-		assertNull(response.getError());
+		assertFalse(response.hasError());
 	}
 
 	@Test
@@ -60,7 +63,7 @@ public class JsonRpcClientTest {
 		assertEquals(response.getResult(), new ArrayList<Integer>(List.of(19, 4, 7)));
 		log.info("Id: " + response.getId());
 		assertEquals(response.getId(), "2");
-		assertNull(response.getError());
+		assertFalse(response.hasError());
 	}
 
 	@Test
@@ -68,9 +71,11 @@ public class JsonRpcClientTest {
 		JsonRpcRequest request = JsonRpcRequest.builder().id("3").jsonrpc(JsonRpcVersion.v2_0).method("geterror")
 				.build();
 		JsonRpcResponse<Integer> response = client.send(request);
+		assertFalse(response.hasResult());
 		assertNull(response.getResult());
 		log.info("Id: " + response.getId());
 		assertEquals(response.getId(), "3");
+		assertTrue(response.hasError());
 		assertEquals(response.getError().getMessage(), "Error Message");
 		assertEquals(response.getError().getCode(), -1);
 	}
@@ -87,9 +92,11 @@ public class JsonRpcClientTest {
 		JsonRpcRequest request = JsonRpcRequest.builder().id("4").jsonrpc(JsonRpcVersion.v2_0).method("getintegers")
 				.params(new Params()).isNamedParams(true).build();
 		JsonRpcResponse<Integer> response = client.send(request);
+		assertTrue(response.hasResult());
 		assertEquals(response.getResult(), IntStream.range(1, 11).boxed().collect(Collectors.toList()));
 		log.info("Id: " + response.getId());
 		assertEquals(response.getId(), "4");
+		assertFalse(response.hasError());
 		assertNull(response.getError());
 	}
 
@@ -110,21 +117,27 @@ public class JsonRpcClientTest {
 		CompletableFuture.allOf(cresponse1, cresponse2, cresponse3).join();
 
 		JsonRpcResponse<Integer> response1 = cresponse1.get();
+		assertTrue(response1.hasResult());
 		assertEquals(response1.getResult(), 19);
 		log.info("Id: " + response1.getId());
 		assertEquals(response1.getId(), "1");
+		assertFalse(response1.hasError());
 		assertNull(response1.getError());
 
 		JsonRpcResponse<List<Integer>> response2 = cresponse2.get();
+		assertTrue(response2.hasResult());
 		assertEquals(response2.getResult(), new ArrayList<Integer>(List.of(19, 4, 7)));
 		log.info("Id: " + response2.getId());
 		assertEquals(response2.getId(), "2");
+		assertFalse(response2.hasError());
 		assertNull(response2.getError());
 
 		JsonRpcResponse<Integer> response3 = cresponse3.get();
+		assertFalse(response3.hasResult());
 		assertNull(response3.getResult());
 		log.info("Id: " + response3.getId());
 		assertEquals(response3.getId(), "3");
+		assertTrue(response3.hasError());
 		assertEquals(response3.getError().getMessage(), "Error Message");
 		assertEquals(response3.getError().getCode(), -1);
 	}
