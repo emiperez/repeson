@@ -8,7 +8,7 @@ It uses the HttpClient of JDK11, so requests can be sent either blocking (synchr
 <dependency>
   <groupId>com.emiperez.repeson</groupId>
   <artifactId>repeson</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 ### 2. Selecting the Json Mapping library
@@ -48,7 +48,7 @@ JsonRpcClient jsonRpcClient = JsonRpcClient.builder()
 Synchronous or blocking:
 ```java
 JsonRpcResponse<Customer> r = jsonRpcClient.sendRequestWithDefaults("getcustomer", paramsPojo);
-if (r.getError() == null) {
+if (r.hasResult()) {
   Customer c = r.getResult();
   //Do whatever with c
 }
@@ -67,7 +67,7 @@ and passed as an argument to send methods:
 ```java
 CustomerListResponse r = jsonRpcClient.sendRequestWithDefaults("listcustomers", paramsPojo, 
 								CustomerListResponse.class);
-if (r.getError() == null) {
+if (r.hasResult()) {
   ArrayList<Customer> cs = r.getResult();
   //Do whatever with cs
 }
