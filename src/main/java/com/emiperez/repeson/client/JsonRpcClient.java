@@ -178,7 +178,7 @@ public class JsonRpcClient {
 	 */
 	public <T> JsonRpcResponse<T> sendRequestWithDefaults(String method)
 			throws IOException, InterruptedException, JsonRpcException {
-		return sendRequestWithDefaults(method, null);
+		return send(buildRequest(method, null));
 	}
 	
 	
@@ -259,7 +259,7 @@ public class JsonRpcClient {
 	 */
 	public <T> CompletableFuture<JsonRpcResponse<T>> sendRequestWithDefaultsAsync(String method)
 			throws JsonRpcException {
-		return sendRequestWithDefaultsAsync(method, null);
+		return sendAsync(buildRequest(method, null));
 	}
 
 	/**
