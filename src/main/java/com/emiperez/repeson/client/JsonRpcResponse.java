@@ -17,6 +17,7 @@ package com.emiperez.repeson.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Consumer;
 
 import com.emiperez.commons.json.apiselector.Json;
 
@@ -83,4 +84,70 @@ public class JsonRpcResponse<T> {
 	public boolean hasError() {
 		return error != null;
 	}
+	
+    /**
+     * If a result is present, performs the given action with the result,
+     * otherwise does nothing.
+     *
+     * @param action the action to be performed, if a result is present
+     * @throws NullPointerException if result is present and the given action is
+     *         {@code null}
+     */
+    public void ifHasResult(Consumer<? super T> action) {
+        if (result != null) {
+            action.accept(result);
+        }
+    }
+    
+    /**
+     * If a result is present, performs the given action with the result,
+     * otherwise performs the given empty-based action.
+     *
+     * @param action the action to be performed, if a result is present
+     * @param emptyAction the empty-based action to be performed, if no result is
+     *        present
+     * @throws NullPointerException if a result is present and the given action
+     *         is {@code null}, or no result is present and the given empty-based
+     *         action is {@code null}.
+     */
+    public void ifHasResultOrElse(Consumer<? super T> action, Runnable emptyAction) {
+        if (result != null) {
+            action.accept(result);
+        } else {
+            emptyAction.run();
+        }
+    }
+	
+    /**
+     * If an error is present, performs the given action with the error,
+     * otherwise does nothing.
+     *
+     * @param action the action to be performed, if an error is present
+     * @throws NullPointerException if error is present and the given action is
+     *         {@code null}
+     */
+    public void ifHasError(Consumer<? super JsonRpcResponseError> action) {
+        if (error != null) {
+            action.accept(error);
+        }
+    }
+    
+    /**
+     * If a result is present, performs the given action with the result,
+     * otherwise performs the given empty-based action.
+     *
+     * @param action the action to be performed, if an error is present
+     * @param emptyAction the empty-based action to be performed, if no result is
+     *        present
+     * @throws NullPointerException if an error is present and the given action
+     *         is {@code null}, or no result is present and the given empty-based
+     *         action is {@code null}.
+     */
+    public void ifHasErrorOrElse(Consumer<? super JsonRpcResponseError> action, Runnable emptyAction) {
+        if (error != null) {
+            action.accept(error);
+        } else {
+            emptyAction.run();
+        }
+    }
 }

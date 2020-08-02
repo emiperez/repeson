@@ -3,6 +3,7 @@ package com.emiperez.repeson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -44,44 +45,55 @@ public class JsonRpcClientTest {
 	}
 
 	@Test
-	public void whenResultIntegerParseTest() throws IOException, InterruptedException, JsonRpcException  {
+	public void whenResultIntegerParseTest() throws IOException, InterruptedException, JsonRpcException {
 		JsonRpcRequest request = JsonRpcRequest.builder().id("1").jsonrpc(JsonRpcVersion.v2_0).method("getinteger")
 				.build();
 		JsonRpcResponse<Integer> response = client.send(request);
+		log.info("Id: " + response.getId());
 		assertTrue(response.hasResult());
 		assertEquals(response.getResult(), 19);
-		log.info("Id: " + response.getId());
+		response.ifHasResult(r -> assertEquals(r, 19));
+		assertThrows(NullPointerException.class, () -> response.ifHasResult(null));
+		assertThrows(NullPointerException.class,
+				() -> response.ifHasResultOrElse(null, () -> System.out.println("Has Result")));
 		assertEquals(response.getId(), "1");
 		assertFalse(response.hasError());
+		assertThrows(NullPointerException.class, () -> response.ifHasErrorOrElse(e -> e.getClass(), null));
 	}
 
 	@Test
-	public void whenResultListOfIntegerParseTest() throws IOException, InterruptedException, JsonRpcException  {
+	public void whenResultListOfIntegerParseTest() throws IOException, InterruptedException, JsonRpcException {
 		JsonRpcRequest request = JsonRpcRequest.builder().id("2").jsonrpc(JsonRpcVersion.v2_0).method("getintegers")
 				.build();
 		JsonRpcResponse<JsonRpcResponseError> response = client.send(request);
-		assertEquals(response.getResult(), new ArrayList<Integer>(List.of(19, 4, 7)));
 		log.info("Id: " + response.getId());
+		assertEquals(response.getResult(), new ArrayList<Integer>(List.of(19, 4, 7)));
 		assertEquals(response.getId(), "2");
 		assertFalse(response.hasError());
 	}
 
 	@Test
-	public void whenErrorParseErrorTest() throws IOException, InterruptedException, JsonRpcException  {
+	public void whenErrorParseErrorTest() throws IOException, InterruptedException, JsonRpcException {
 		JsonRpcRequest request = JsonRpcRequest.builder().id("3").jsonrpc(JsonRpcVersion.v2_0).method("geterror")
 				.build();
 		JsonRpcResponse<Integer> response = client.send(request);
+		log.info("Id: " + response.getId());
 		assertFalse(response.hasResult());
 		assertNull(response.getResult());
-		log.info("Id: " + response.getId());
 		assertEquals(response.getId(), "3");
 		assertTrue(response.hasError());
+		assertThrows(NullPointerException.class,
+				() -> response.ifHasError(null));
+		assertThrows(NullPointerException.class,
+				() -> response.ifHasErrorOrElse(null, () -> System.out.println("Has Error")));
 		assertEquals(response.getError().getMessage(), "Error Message");
 		assertEquals(response.getError().getCode(), -1);
+		response.ifHasError(e -> assertEquals(e.getCode(), -1));
+		assertThrows(NullPointerException.class, () -> response.ifHasResultOrElse(r -> r.getClass(), null));
 	}
 
 	@Test
-	public void whenParamsIncludeParams() throws IOException, InterruptedException, JsonRpcException  {
+	public void whenParamsIncludeParams() throws IOException, InterruptedException, JsonRpcException {
 
 		@Getter
 		class Params implements Serializable {
@@ -101,8 +113,7 @@ public class JsonRpcClientTest {
 	}
 
 	@Test
-	public void whenAsyncAllOfTest() throws JsonRpcException, InterruptedException, ExecutionException
-			 {
+	public void whenAsyncAllOfTest() throws JsonRpcException, InterruptedException, ExecutionException {
 		JsonRpcRequest request1 = JsonRpcRequest.builder().id("1").jsonrpc(JsonRpcVersion.v2_0).method("getinteger")
 				.build();
 		CompletableFuture<JsonRpcResponse<Integer>> cresponse1 = client.sendAsync(request1);
