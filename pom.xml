@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.emiperez.repeson</groupId>
 	<artifactId>repeson</artifactId>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<name>repeson</name>
 	<description>A RPC-JSON Client for Java</description>
 	<url>https://github.com/emiperez/repeson</url>

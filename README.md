@@ -8,7 +8,7 @@ It uses the HttpClient of JDK11, so requests can be sent either blocking (synchr
 <dependency>
   <groupId>com.emiperez.repeson</groupId>
   <artifactId>repeson</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 ### 2. Selecting the Json Mapping library

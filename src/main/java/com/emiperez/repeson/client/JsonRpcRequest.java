@@ -102,8 +102,17 @@ public class JsonRpcRequest {
 	public String getJson() throws JsonRpcException {
 		String paramsJson = "";
 		if (params != null) {
-			paramsJson = ", \"params\": " + (isNamedParams ? Json.INSTANCE.api().serialize(params)
-					: Json.INSTANCE.api().serializeAsArray(params));
+
+			if (params instanceof String) {
+				paramsJson = "[\"" + params + "\"]";
+			} else if (params instanceof Integer) {
+				paramsJson = "[" + params + "]";
+			} else {
+				paramsJson = (isNamedParams ? Json.INSTANCE.api().serialize(params)
+						: Json.INSTANCE.api().serializeAsArray(params));
+			}
+			
+			paramsJson = ", \"params\": " + paramsJson;
 		}
 		String sRequest = MessageFormat.format(RPC_JSON_TEMPLATE, jsonrpc, id, method, paramsJson);
 		log.info("Request: " + sRequest);
