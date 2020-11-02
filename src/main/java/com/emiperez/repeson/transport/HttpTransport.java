@@ -75,7 +75,6 @@ public class HttpTransport implements Transport {
 
 	@Override
 	public InputStream send(String rpcJsonRequest) throws IOException, InterruptedException {
-		System.out.println("command: " + rpcJsonRequest);
 		HttpRequest request = buildHttpRequest(rpcJsonRequest);
 		HttpResponse<InputStream> response;
 		response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
