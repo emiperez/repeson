@@ -1,9 +1,10 @@
 package com.emiperez.commons.json.apiselector;
 
 import java.util.logging.Logger;
+
 /**
- * This Singleton loads the api selected in the dependencies of the project, 
- * and hides it behind the JsonMapper interface.
+ * This Singleton loads the api selected in the dependencies of the project, and
+ * hides it behind the JsonMapper interface.
  */
 public enum Json {
 	INSTANCE;
@@ -19,15 +20,10 @@ public enum Json {
 			log.info("com.fasterxml.jackson.databind.ObjectMapper Not Found.");
 		}
 		if (api == null) {
-			try {
-				Class.forName("jakarta.json.bind.Jsonb");
-				api = new YassonJsonMapper();
-			} catch (ClassNotFoundException e) {
-				throw new ExceptionInInitializerError(new NoJsonApiException("No Json Api Found. Check your project's dependencies."));
-			}
+			throw new ExceptionInInitializerError(new NoJsonApiException("No Json Api Found. Check your project's dependencies."));
 		}
 	}
-	
+
 	public JsonMapper api() {
 		return api;
 	}

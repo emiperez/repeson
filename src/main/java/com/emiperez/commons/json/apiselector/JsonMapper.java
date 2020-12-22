@@ -1,5 +1,6 @@
 package com.emiperez.commons.json.apiselector;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -33,4 +34,8 @@ public interface JsonMapper {
 	 * @throws IOException if an error occurs in serialization
 	 */
 	<T> T deserialize(InputStream input, Class<T> type) throws IOException;
+	
+	default <T> T deserialize(String input, Class<T> type) throws IOException {
+		return deserialize(new ByteArrayInputStream(input.getBytes()), type);
+	}
 }
